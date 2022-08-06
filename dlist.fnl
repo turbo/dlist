@@ -1,5 +1,3 @@
-(local inspect (require :inspect))
-
 (λ [?src-table]
   (let [self { :length 0
                :__refmap { } 
