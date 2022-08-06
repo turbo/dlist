@@ -19,8 +19,7 @@
   (each [e (l.elements-reverse)]
     (print (inspect e.value)))
   (print)
-  (print (inspect (l.as-table)))
-  )
+  (print (inspect (l.as-table))))
 
 (let [l (dlist [ 1 2 { :foo :bar } ])]
   (each [e (l.elements)]
@@ -53,6 +52,17 @@
     (assert (l.has-value 1.5))
     (assert (not (l.has-value 15)))
     (assert (l.has-element te))
-    (print (inspect (l.as-table))))
+    (print (inspect (l.as-table)))))
 
-  )
+(print)
+(print)
+
+(let [l (dlist [ 1 2 3 3 3 4 4])]
+  (print (inspect (l.as-table)))
+  (l.remove-value 3)
+  (l.remove-value 4)
+  (l.remove-value 6)
+  (print (inspect (l.as-table)))
+  (l.remove-value-all 3)
+  (l.remove-value-all 4)
+  (print (inspect (l.as-table))))
