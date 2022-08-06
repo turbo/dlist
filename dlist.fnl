@@ -11,7 +11,9 @@
         (tset :back nil)))
 
     (λ self.has-element [element]
-      (not= nil (. self.__refmap element)))
+      (if (. self.__refmap element)
+          element
+          nil))
 
     ; inserts a new element e with value v immediately after mark and returns
     ; e. If mark is not an element of self, the list is not modified.
@@ -130,12 +132,24 @@
       (each [e (alist.elements-reverse)]
         (self.push-front e.value)))
 
+    ; if found returns element
     (λ self.has-value [value]
-      (var found false)
+      (var found nil)
       (each [e (self.elements) :until found]
         (when (= e.value value)
-          (set found true)))
+          (set found e)))
       found)
+
+    (λ self.remove-value [value]
+      (let [ve (self.has-value value)]
+        (if ve 
+            (do
+              (self.remove ve)
+              true)
+            false)))
+
+    (λ self.remove-value-all [value]
+      (while (self.remove-value value)))
 
     (when ?src-table
       (each [_ v (ipairs ?src-table)]
